@@ -31,7 +31,7 @@ class RegisterType extends AbstractType
             ->add('job')
             ->add('trainerDesc')
             ->add('studentDesc')
-            ->add('img','file')
+            ->add('file','file')
             ->add('email','email')
             ->add('password', 'repeated', array (
                     'type' => 'password',

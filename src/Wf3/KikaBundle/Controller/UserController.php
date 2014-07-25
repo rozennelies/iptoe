@@ -28,17 +28,19 @@ class UserController extends Controller {
 		$register_form->handleRequest($request);
 
 		if ($register_form->isvalid()) {
-			echo('<pre>');
-			var_dump($request);
-			echo('<pre>');
+			//echo('<pre>');
+			//var_dump($request);
+			//echo('<pre>');
 
 			// sauvegarde de l image dans un dossier
-			$dir = $this->get('kernel')->getRootDir() . '/../web/uploads';
+			$dir = $this->get('kernel')->getRootDir() . '/../web/uploadsimg/profil';
 
 			// $file = $user->getImg();  non ..
 			$file = $user->getFile();
 			$extension = $file->guessExtension();
-			$newFilename = base64_encode(time()).'.'.$extension;
+
+			//base64_encode(time())
+			$newFilename = uniqid().'.'.$extension;
 
 			$file->move($dir, $newFilename);
 			$user->setImg($newFilename);
@@ -93,9 +95,9 @@ class UserController extends Controller {
 
 			//print_r($user);	
 			// sauvegarde en bdd
-			//$em = $this->getDoctrine()->getManager();
-			//$em->persist($user);
-			//$em->flush();
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($user);
+			$em->flush();
 		}
 
 		$params = array (

@@ -49,9 +49,7 @@ class User
      *      max = "255",
      *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
      *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
-     * )   
-     *
-     *
+     *)   
      *
      */
     private $name;
@@ -66,7 +64,7 @@ class User
      *      max = "255",
      *      minMessage = "Votre prénom doit faire au moins {{ limit }} caractères",
      *      maxMessage = "Votre prénom ne peut pas être plus long que {{ limit }} caractères"
-     * )
+     *)
      *
      */
     private $firstname;
@@ -110,14 +108,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="img", type="string", length=255, nullable=true)
-     *
-     * @Assert\Image(
-     *     minWidth = 200,
-     *     maxWidth = 400,
-     *     minHeight = 200,
-     *     maxHeight = 400,
-     *     mimeTypesMessage = "Ce fichier n'est pas une image"
-     *)
+     *     
      */
     private $img;
 
@@ -205,7 +196,17 @@ class User
      */
     private $coachTrainings;
 
-    // propriete de type fichier, on a l image dedans
+    
+    /**
+    *
+    * @Assert\Image(
+    *     minWidth = 200,
+    *     maxWidth = 400,
+    *     minHeight = 200,
+    *     maxHeight = 400,
+    *     mimeTypesMessage = "Ce fichier n'est pas une image"
+    *)
+    */
     private $file;
 
 
@@ -714,5 +715,29 @@ class User
     public function getCoachTrainings()
     {
         return $this->coachTrainings;
+    }
+
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return User
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }
