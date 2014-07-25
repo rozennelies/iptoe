@@ -1,0 +1,4 @@
+wf3_kika:
+    resource: "@Wf3KikaBundle/Resources/config/routing.yml"
+    prefix:   /
+

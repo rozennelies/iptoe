@@ -1,0 +1,7 @@
+parameters:
+#    wf3_kika.example.class: Wf3\KikaBundle\Example
+
+services:
+#    wf3_kika.example:
+#        class: %wf3_kika.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %} Kikala !{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        <div id="wrapper">
+            <ul>
+                <li><a href="{{ path('wf3_kika_home')}}">Accueil</a></li>
+                <li><a href="{{ path('wf3_kika_apropos')}}">A propos de kikala</a></li>
+                <li><a href="{{ url('wf3_kika_legal')}}">Mentions légales</a></li>
+                <li><a href="{{ url('wf3_kika_registercreate')}}">Inscription utilisateur</a></li>
+                <li><a href="#">Connexion</a></li>
+                <li><a href="#">Deconnexion</a></li>
+                
+                                             
+                
+            </ul>
+        </div>   
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

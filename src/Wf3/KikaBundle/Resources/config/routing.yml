@@ -1,0 +1,23 @@
+
+wf3_kika_home:
+    path:     /
+    defaults: { _controller: Wf3KikaBundle:Default:home}
+
+wf3_kika_apropos:
+    path:     /apropos/
+    defaults: { _controller: Wf3KikaBundle:Default:apropos }
+
+wf3_kika_legal:
+    path:     /legal/
+    defaults: { _controller: Wf3KikaBundle:Default:legal }    
+
+
+wf3_kika_registercreate:
+    path:     /inscription/
+    defaults: { _controller: Wf3KikaBundle:User:registerCreate } 
+
+
+
+wf3_kika_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: Wf3KikaBundle:Default:index }
