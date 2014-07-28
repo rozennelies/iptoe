@@ -11,6 +11,7 @@ class DefaultController extends Controller
         return $this->render('Wf3KikaBundle:Default:index.html.twig', array('name' => $name));
     }
 
+    
 
     public function homeAction() {
 
@@ -35,8 +36,30 @@ class DefaultController extends Controller
         
         //$em->flush();
 
+        //récupère le repository de User (pour faire des SELECT)
+        $userRepository = $this->getDoctrine()->getRepository("Wf3KikaBundle:User");
 
-    	return $this->render('Wf3KikaBundle:Default:home.html.twig');
+        $kikologueInscrit = $userRepository->findKikologuesInscrits();
+
+
+        $trainingRepository = $this->getDoctrine()->getRepository("Wf3KikaBundle:Training");
+
+        $kikalaFormations = $trainingRepository->findKikalaFormations();
+
+       // echo ($kikalaFormations);
+
+        //if (empty($kikalaFormations)) {
+        //   $kikalaFormations = 0;
+        //}
+
+
+        //shoote ça à la vue
+        $params = array (
+            "kikologueInscrit" => $kikologueInscrit,
+            "kikalaFormations" => $kikalaFormations 
+            );
+
+    	return $this->render('Wf3KikaBundle:Default:home.html.twig',$params);
 
     } 
 

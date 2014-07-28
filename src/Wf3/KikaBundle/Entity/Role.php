@@ -3,6 +3,7 @@
 namespace Wf3\KikaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
  * Role
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Wf3\KikaBundle\Entity\RoleRepository")
  */
-class Role
+class Role implements RoleInterface
 {
     /**
      * @var integer
@@ -61,4 +62,19 @@ class Role
     {
         return $this->name;
     }
+
+    /**
+     * Get role
+     *
+     * @return string 
+     */
+    public function getRole()
+    {
+        return $this->name;
+    }
+
+
+
+
+
 }

@@ -10,19 +10,36 @@
 
         <div id="wrapper">
             <ul>
+                <!--li><a href="#">Connexion</a></li>
+                <li><a href="#">Deconnexion</a></li-->
+                {% if app.user %}
+                <li><a href="{{ path('logout')}}">deconnexion</a></li>
+                {% else %}
+                <li><a href="{{ path('login')}}">connexion</a></li>
+                <li><a href="{{ path('wf3_kika_registercreate')}}">créer une inscription</a>
+                
+                </li>
+                {% endif %}
+                                                      
+                
+            </ul>
+             
+
+        </div>   
+        
+
+        {% block body %}{% endblock %}
+        {% block wrapper1 %}{% endblock %}
+
+        {% block footer %}
+            <ul>
                 <li><a href="{{ path('wf3_kika_home')}}">Accueil</a></li>
                 <li><a href="{{ path('wf3_kika_apropos')}}">A propos de kikala</a></li>
                 <li><a href="{{ url('wf3_kika_legal')}}">Mentions légales</a></li>
                 <li><a href="{{ url('wf3_kika_registercreate')}}">Inscription utilisateur</a></li>
-                <li><a href="#">Connexion</a></li>
-                <li><a href="#">Deconnexion</a></li>
-                
-                                             
-                
             </ul>
-        </div>   
-
-        {% block body %}{% endblock %}
+        
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

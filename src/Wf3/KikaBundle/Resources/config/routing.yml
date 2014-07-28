@@ -16,6 +16,15 @@ wf3_kika_registercreate:
     path:     /inscription/
     defaults: { _controller: Wf3KikaBundle:User:registerCreate } 
 
+wf3_kika_accountAccueil:
+    path:     /accountAccueil/
+    defaults: { _controller: Wf3KikaBundle:User:accountAccueil }     
+
+wf3_kika_forgotPassword:
+    path:     /forgotPassword/
+    defaults: { _controller: Wf3KikaBundle:User:forgotPassword }     
+
+
 
 
 wf3_kika_homepage:

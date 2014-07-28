@@ -72,12 +72,12 @@ class UserController extends Controller {
 
 			// hasher le mot de passe
 			// on va chercher le service encoder_factory
-			//$factory = $this->get('security.encoder_factory');
+			$factory = $this->get('security.encoder_factory');
 
 
-			//$encoder = $factory->getEncoder($user);
-			//$password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-			//$user->setPassword($password);
+			$encoder = $factory->getEncoder($user);
+			$password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+			$user->setPassword($password);
 
 			//print_r($user);
 			//die();
@@ -89,7 +89,7 @@ class UserController extends Controller {
 			$role = $roleRepo->findOneByName("ROLE_USER");
 
 			// et on l affecte à notre user
-			//$user->addRole($role);
+			$user->addRole($role);
 
 			//print_r ($request);
 
@@ -108,7 +108,19 @@ class UserController extends Controller {
 	}
 
 
-	/*public function loginAction(Request $request)
+	 public function accountAccueilAction()
+    {
+        return $this->render('Wf3KikaBundle:User:account_accueil.html.twig');
+    }
+
+     public function forgotPasswordAction()
+    {
+        return $this->render('Wf3KikaBundle:User:forgot_password.html.twig');
+    }
+
+
+
+	public function loginAction(Request $request)
     {
         $session = $request->getSession();
 
@@ -124,18 +136,21 @@ class UserController extends Controller {
             $error = '';
         }
 
-        // last username entered by the user
-        $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+        // email entered by the user
+        $email = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+        //$lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+
 
         return $this->render(
             'Wf3KikaBundle:User:login.html.twig',
             array(
-                // last username entered by the user
-                'last_username' => $lastUsername,
+                // email entered by the user
+                //'email' 		=> $email,
+                'email' 		=> $email,
                 'error'         => $error,
             )
         );
-    } */
+    } 
 
 
 

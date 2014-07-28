@@ -2,3 +2,10 @@ wf3_kika:
     resource: "@Wf3KikaBundle/Resources/config/routing.yml"
     prefix:   /
 
+login:
+    pattern:     /connexion/
+    defaults: { _controller: Wf3KikaBundle:User:login }
+login_check:
+    path: /login_check   
+logout:
+    path: /logout        

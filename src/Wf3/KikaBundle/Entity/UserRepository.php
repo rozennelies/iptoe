@@ -12,4 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+
+
+	public function findKikologuesInscrits () {
+
+		//$query = $this->getEntityManager()->createQuery('SELECT con, cat FROM Wf3KikaBundle:User con LEFT JOIN con.category cat '); 
+
+		//$kikologuesInscrits = $query->getResult();
+
+		//return $contents;
+
+
+		$count = $this->createQueryBuilder('kika_user')
+                 ->select('COUNT(kika_user)')
+                 ->getQuery()
+                 ->getSingleScalarResult();
+       
+        return $count;
+
+    }    
+
 }

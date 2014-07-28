@@ -4,6 +4,8 @@ namespace Wf3\KikaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * User
@@ -11,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table("kika_user")
  * @ORM\Entity(repositoryClass="Wf3\KikaBundle\Entity\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable, EquatableInterface
 {
     /**
      * @var integer
@@ -648,7 +650,7 @@ class User
      */
     public function getRoles()
     {
-        return $this->roles;
+        return $this->roles->ToArray();
     }
 
     /**
@@ -740,4 +742,75 @@ class User
     {
         return $this->file;
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+            $this->setPassword("");
+    }
+
+    /**
+     * @see \Serializable::serialize()
+    */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->salt,
+            $this->token
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->salt,
+            $this->token
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+
+    // compare l'instance user actuelle et celle passée en paramètre
+    public function isequalTo(userInterface $user) {
+
+        if ($this->id === $user->getId() &&
+            $this->token === $user->getToken()) {
+            return true;
+        }
+        return false;
+
+
+    }
+
+
+    // symfony base son systeme de securite sur le champ nommé username
+    // si authentification sur un autre champs il faut le passer ainsi via la methode username
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+
+
+
 }

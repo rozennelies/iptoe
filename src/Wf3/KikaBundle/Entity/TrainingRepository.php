@@ -12,4 +12,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class TrainingRepository extends EntityRepository
 {
+
+
+	public function findKikalaFormations () {
+
+		//$query = $this->getEntityManager()->createQuery('SELECT con, cat FROM Wf3KikaBundle:User con LEFT JOIN con.category cat '); 
+
+		//$kikologuesInscrits = $query->getResult();
+
+		//return $contents;
+
+
+		$count = $this->createQueryBuilder('training')
+                 ->select('COUNT(training)')
+                 ->andWhere('training.status = 1')
+                 ->getQuery()
+                 ->getSingleScalarResult();
+
+       // echo ($count);  j ai  0        
+       
+        return $count;
+
+    }    
+
+
 }
