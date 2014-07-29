@@ -32,4 +32,32 @@ class UserRepository extends EntityRepository
 
     }    
 
+
+    public function findByEmailAndToken ($email, $token) {
+
+		//$query = $this->getEntityManager()->createQuery('SELECT con, cat FROM Wf3KikaBundle:User con LEFT JOIN con.category cat '); 
+
+		//$kikologuesInscrits = $query->getResult();
+
+		//return $contents;
+
+
+		$kikologueFound = $this->createQueryBuilder('kika_user')
+		         ->select('kika_user')
+                 ->andWhere('kika_user.email = :email')
+                 ->andWhere('kika_user.token = :token')
+                 ->setParameter('email', $email)
+                 ->setParameter('token', $token)
+                 ->getQuery()
+                 ->getOneOrNullResult();
+       
+        return $kikologueFound;
+
+
+        
+
+
+
+    }    
+
 }

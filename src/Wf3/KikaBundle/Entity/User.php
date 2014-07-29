@@ -29,7 +29,7 @@ class User implements UserInterface, \Serializable, EquatableInterface
      *
      * @ORM\Column(name="pseudo", type="string", length=100)
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="pseudo non renseigné")
      *
      * @Assert\Length(
      *      min = "2",
@@ -117,12 +117,17 @@ class User implements UserInterface, \Serializable, EquatableInterface
     /**
      * @var string
      *
+     * @Assert\Email(groups={"forgot"})
+     *
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
 
     /**
      * @var string
+     *
+     * @Assert\Length(min=5, groups={"updatePassword"})
+     *
      *
      * @ORM\Column(name="password", type="string", length=255)
      */

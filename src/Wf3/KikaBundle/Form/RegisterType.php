@@ -15,10 +15,15 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo')
-            ->add('name')
-            ->add('firstname')
-            ->add('birthDate')
+            ->add('pseudo', null, array(
+                    "label" => "Votre Pseudo"))
+            ->add('name', null, array(
+                    "label" => "Votre Nom"))
+            ->add('firstname' , null, array(
+                    "label" => "Votre Prénom"))
+            ->add('birthDate', null , array(
+                    "years" => range(1900, date ('Y')),
+                    "label" => "Votre date de naissance"))
             ->add('gender', 'choice', array(
                 'label' => false,
                 'choices' => array(
@@ -28,11 +33,16 @@ class RegisterType extends AbstractType
                 'expanded' => true, 
                 'multiple' => false
                 ))
-            ->add('job')
-            ->add('trainerDesc')
-            ->add('studentDesc')
-            ->add('file','file')
-            ->add('email','email')
+            ->add('job', null, array(
+                    "label" => "Votre métier"))
+            ->add('trainerDesc', null, array(
+                    "label" => "Votre description en tant que formateur"))
+            ->add('studentDesc' , null, array(
+                    "label" => "Votre description en tant qu'étudiant"))
+            ->add('file','file', array(
+                    "label" => " Télécharger la photo de votre profil"))
+            ->add('email','email',array(
+                    "label" => "Votre e-mail"))
             ->add('password', 'repeated', array (
                     'type' => 'password',
                     'invalid_message' => 'Les mots de passe ne sont pas identiques.',

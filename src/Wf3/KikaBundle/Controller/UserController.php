@@ -11,6 +11,8 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use \DateTime;
 
 use Wf3\KikaBundle\Form\RegisterType;
+use Wf3\KikaBundle\Form\ForgotPasswordType;
+use Wf3\KikaBundle\Form\UpdatePasswordType;
 use Wf3\KikaBundle\Entity\User;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -113,12 +115,131 @@ class UserController extends Controller {
         return $this->render('Wf3KikaBundle:User:account_accueil.html.twig');
     }
 
-     public function forgotPasswordAction()
+     public function forgotPasswordAction(Request $request)
     {
-        return $this->render('Wf3KikaBundle:User:forgot_password.html.twig');
+
+    	$user = new User();
+		$forgot_form = $this->createForm(new ForgotPasswordType, $user);
+
+		$forgot_form->handleRequest($request);
+
+		if ($forgot_form->isvalid()) {
+			
+			//récupère le repository de User (pour faire des SELECT)
+			$userRepository = $this->getDoctrine()->getRepository("Wf3KikaBundle:User");
+			//récupère l'objet content dont l'id est égal à 1
+			//$content = $contentRepository->find(1);
+
+			$email = $user->getEmail();
+
+			// crée toutes les methodes de recherche pour le select 
+			$userForgot = $userRepository->findOneByEmail($email);
+
+
+			if (!empty($userForgot)) {
+
+			//$name = 'toto';
+
+				$message = \Swift_Message::newInstance()
+        			->setSubject('Mot de passe oublié')
+        			->setFrom('kikala@example.com')
+        			->setTo($email)
+        			->setBody($this->renderView('Wf3KikaBundle:Email:email.html.twig', array('name'  => $userForgot->getName(),
+        					  'email' => $email,
+        			 		  'token' => $userForgot->getToken())),'text/html');
+
+    				$this->get('mailer')->send($message);
+
+
+    		}
+			
+			
+		}
+
+		$params = array (
+			"forgot_form" => $forgot_form->createView()	
+			);
+
+	
+        return $this->render('Wf3KikaBundle:User:forgot_password.html.twig', $params);
     }
 
 
+    public function updatePasswordAction(Request $request, $email, $token)
+    {
+
+    	$userRepository = $this->getDoctrine()->getRepository("Wf3KikaBundle:User");
+
+        $kikologueFound = $userRepository->findByEmailAndToken($email,$token);
+
+        if ($kikologueFound) {
+
+        	$kikologueFound->setPassword("");
+
+			$update_form = $this->createForm(new UpdatePasswordType, $kikologueFound);
+
+			$update_form->handleRequest($request);
+
+			if ($update_form->isvalid()) {
+
+
+
+				$generator = new SecureRandom();
+				// recup du binaire
+				// bin2hex change du binaire en hexa
+				// salt
+				$salt = bin2hex($generator->nextBytes(40));
+				$kikologueFound->setSalt($salt);
+
+				// hasher le mot de passe
+				// on va chercher le service encoder_factory
+				$factory = $this->get('security.encoder_factory');
+
+
+				$encoder = $factory->getEncoder($kikologueFound);
+
+				$password = $encoder->encodePassword($kikologueFound->getPassword(), $kikologueFound->getSalt());
+				$kikologueFound->setPassword($password);
+
+				$token = bin2hex($generator->nextBytes(40));
+				$kikologueFound->setToken($token);
+
+				$kikologueFound->setDateModified(new DateTime());
+
+				$em = $this->getDoctrine()->getManager();
+
+				$em->persist($kikologueFound);
+          		
+            	// exécute la requête
+            	$em->flush();
+
+
+
+
+
+
+			}	
+		
+    	
+			$params = array (
+				"update_form" => $update_form->createView()	
+			);  
+
+	
+        	return $this->render('Wf3KikaBundle:User:update_password.html.twig', $params);
+
+        	
+        }
+        else
+        {
+        	return $this->redirect($this->generateUrl('wf3_kika_home')); //redirect
+        }
+
+    	
+      
+
+
+    }
 
 	public function loginAction(Request $request)
     {

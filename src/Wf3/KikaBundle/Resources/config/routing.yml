@@ -9,22 +9,24 @@ wf3_kika_apropos:
 
 wf3_kika_legal:
     path:     /legal/
-    defaults: { _controller: Wf3KikaBundle:Default:legal }    
+    defaults: { _controller: Wf3KikaBundle:Default:legal }
 
 
 wf3_kika_registercreate:
     path:     /inscription/
-    defaults: { _controller: Wf3KikaBundle:User:registerCreate } 
+    defaults: { _controller: Wf3KikaBundle:User:registerCreate }
 
 wf3_kika_accountAccueil:
     path:     /accountAccueil/
-    defaults: { _controller: Wf3KikaBundle:User:accountAccueil }     
+    defaults: { _controller: Wf3KikaBundle:User:accountAccueil }
 
 wf3_kika_forgotPassword:
     path:     /forgotPassword/
-    defaults: { _controller: Wf3KikaBundle:User:forgotPassword }     
+    defaults: { _controller: Wf3KikaBundle:User:forgotPassword }
 
-
+wf3_kika_updatePassword:
+    path:     /updatePassword/{email}/{token}
+    defaults: { _controller: Wf3KikaBundle:User:updatePassword }
 
 
 wf3_kika_homepage:
