@@ -5,6 +5,15 @@
 
 {% endblock %}  
 
+{% block wrapper %}
+    <div>
+        <ul>
+            <li><a href="{{ path('wf3_kika_home')}}">Accueil</a></li>
+        </ul> 
+    </div>       
+
+{% endblock %}
+
 {% block wrapper1  %}
 {% if error %}
     <div>{{ error.message }}</div>
@@ -40,9 +49,9 @@
 {% block footer %}
             <ul>
                 
-                <li><a href="{{ url('wf3_kika_registercreate')}}">Inscription utilisateur</a></li>
+                <li><a href="{{ url('wf3_kika_registercreate')}}">Créer un compte</a></li>
 
                 <li><a href="{{ url('wf3_kika_forgotPassword')}}">Mot de passe oublié ? </a></li>
             </ul>
         
-        {% endblock %}
+{% endblock %}

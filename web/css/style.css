@@ -1,0 +1,14 @@
+
+li {
+
+	list-style: none;
+	float:left;
+	margin-left:10px;
+}
+
+h1 {
+	padding-top:50px;
+	clear:both;
+	color:purple;
+}
+

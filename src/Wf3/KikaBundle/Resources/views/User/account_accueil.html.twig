@@ -14,6 +14,29 @@
 Mon compte:  accueil !
 </h1>
 
+<div> 
+	<div> Bonjour {{ kikologue.pseudo }}  !</div>
+	<img src="{{ asset('uploadsimg/profil/')}}{{ kikologue.img }}">
+</div>
+
+
+<div>
+	<div> Nombre de kikos en Banque: {{ kikologue.kikoCredit }} </div>
+	<a href="{{ path('wf3_kika_addTraining')}}">Création d'un formation </a>
+</div>
+
+<div>
+	<div> Nombre de formations données: {{ kikologue.coachTrainings|length }} </div>
+	<a href="{{ path('wf3_kika_home')}}">Mes formations </a>
+</div>
+</div>
+
+<div>
+	<div> Nombre de formations suivies: {{ kikologue.subscriptions|length }} </div>
+	<a href="{{ path('wf3_kika_home')}}">Mes inscriptions </a>
+</div>
+
+
 {# novalidate desactive la validation html5 des pop up #}
 {#   #}
 {# {{ form(register_form, {'attr': {'novalidate': 'novalidate'}})}}

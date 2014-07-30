@@ -112,7 +112,13 @@ class UserController extends Controller {
 
 	 public function accountAccueilAction()
     {
-        return $this->render('Wf3KikaBundle:User:account_accueil.html.twig');
+
+    	$kikologue = $this->getUser();
+
+    	$params['kikologue'] =  $kikologue;
+
+    	    	
+        return $this->render('Wf3KikaBundle:User:account_accueil.html.twig',$params);
     }
 
      public function forgotPasswordAction(Request $request)
@@ -214,6 +220,7 @@ class UserController extends Controller {
             	$em->flush();
 
 
+            	return $this->redirect($this->generateUrl('wf3_kika_openTrainings')); //redirect
 
 
 

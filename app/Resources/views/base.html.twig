@@ -3,10 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %} Kikala !{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+                <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+
+            {% stylesheets '@Wf3KikaBundle/Resources/public/css/*.css' filter='cssrewrite'
+            %}
+             <script src="{{ asset_url }}"></script>
+            
+
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+
+    {% block wrapper %}
 
         <div id="wrapper">
             <ul>
@@ -16,7 +27,7 @@
                 <li><a href="{{ path('logout')}}">deconnexion</a></li>
                 {% else %}
                 <li><a href="{{ path('login')}}">connexion</a></li>
-                <li><a href="{{ path('wf3_kika_registercreate')}}">créer une inscription</a>
+                <li><a href="{{ path('wf3_kika_registercreate')}}">Inscrivez-vous !</a>
                 
                 </li>
                 {% endif %}
@@ -26,7 +37,9 @@
              
 
         </div>   
+
         
+    {% endblock %}    
 
         {% block body %}{% endblock %}
         {% block wrapper1 %}{% endblock %}

@@ -28,6 +28,10 @@ wf3_kika_updatePassword:
     path:     /updatePassword/{email}/{token}
     defaults: { _controller: Wf3KikaBundle:User:updatePassword }
 
+wf3_kika_openTrainings:
+    path:     /openTrainings/
+    defaults: { _controller: Wf3KikaBundle:Training:openTrainings }    
+
 
 wf3_kika_homepage:
     path:     /hello/{name}
