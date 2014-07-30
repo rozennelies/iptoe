@@ -6,12 +6,7 @@
         {% block stylesheets %}
                 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 
-            {% stylesheets '@Wf3KikaBundle/Resources/public/css/*.css' filter='cssrewrite'
-            %}
-             <script src="{{ asset_url }}"></script>
             
-
-            {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>

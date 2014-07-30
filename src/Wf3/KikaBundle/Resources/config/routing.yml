@@ -32,6 +32,19 @@ wf3_kika_openTrainings:
     path:     /openTrainings/
     defaults: { _controller: Wf3KikaBundle:Training:openTrainings }    
 
+wf3_kika_addTraining:
+    path:     /addTraining/
+    defaults: { _controller: Wf3KikaBundle:Training:addTraining }    
+
+wf3_kika_myTrainings:
+    path:     /myTrainings/
+    defaults: { _controller: Wf3KikaBundle:Training:myTrainings }
+
+wf3_kika_mySubscriptions:
+    path:     /mySubscriptions/
+    defaults: { _controller: Wf3KikaBundle:Training:mySubscriptions }
+
+
 
 wf3_kika_homepage:
     path:     /hello/{name}

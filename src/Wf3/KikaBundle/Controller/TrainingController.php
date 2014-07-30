@@ -15,6 +15,28 @@ class TrainingController extends Controller
 
 	}	
 
+	public function addTrainingAction() {
+
+		 return $this->render('Wf3KikaBundle:Training:add_training.html.twig');
+
+
+	}	
+
+	public function myTrainingsAction() {
+
+		 return $this->render('Wf3KikaBundle:Training:my_trainings.html.twig');
+
+
+	}	
+
+	public function mySubscriptionsAction() {
+
+		 return $this->render('Wf3KikaBundle:Training:my_subscriptions.html.twig');
+
+
+	}	
+
+
 
     public function indexAction($name)
     {
