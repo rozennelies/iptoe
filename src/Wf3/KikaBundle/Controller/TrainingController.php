@@ -1,8 +1,11 @@
 <?php
 
 namespace Wf3\KikaBundle\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Wf3\KikaBundle\Form\AddTrainingType;
+use Wf3\KikaBundle\Entity\Training;
 
 class TrainingController extends Controller
 {
@@ -15,9 +18,27 @@ class TrainingController extends Controller
 
 	}	
 
-	public function addTrainingAction() {
+	public function addTrainingAction(Request $request) {
 
-		 return $this->render('Wf3KikaBundle:Training:add_training.html.twig');
+		$training = new Training();
+		$training_form = $this->createForm(new AddTrainingType, $training);
+
+		$training_form->handleRequest($request);
+
+		if ($training_form->isvalid()) {
+
+
+		}
+		
+		$params = array (
+			"training_form" => $training_form->createView()	
+			);	
+
+
+
+
+
+		 return $this->render('Wf3KikaBundle:Training:add_training.html.twig',$params);
 
 
 	}	

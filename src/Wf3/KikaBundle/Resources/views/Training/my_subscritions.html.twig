@@ -3,7 +3,7 @@
 {# commentaire twig #}
 
 {% block title %}
-	{{ parent() }} - créer une formation !
+	{{ parent() }} - mes inscriptions !
 {% endblock %}
 	
 	
@@ -11,14 +11,15 @@
 
 {% block body %}
 <h1>
-créer une formation !
+Mes inscriptions en tant qu'étudiant !
 </h1>
 
 
 
 {# novalidate desactive la validation html5 des pop up #}
 {#   #}
- {{ form(training_form, {'attr': {'novalidate': 'novalidate'}})}}
+{# {{ form(register_form, {'attr': {'novalidate': 'novalidate'}})}}
+{% endblock %} #}
 
 {# wf3_wikibundle_content_darecreated #}
 {# chargement du calendar jQuery UI #}
