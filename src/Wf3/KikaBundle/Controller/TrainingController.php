@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Wf3\KikaBundle\Form\AddTrainingType;
 use Wf3\KikaBundle\Entity\Training;
+use Wf3\KikaBundle\Entity\User;
 
 class TrainingController extends Controller
 {
@@ -26,6 +27,19 @@ class TrainingController extends Controller
 		$training_form->handleRequest($request);
 
 		if ($training_form->isvalid()) {
+
+			// sauvegarde de l image dans un dossier
+			$dir = $this->get('kernel')->getRootDir() . '/../web/uploadsimg/training';
+
+			// $file = $user->getImg();  non ..
+			$file = $training->getFile();
+			$extension = $file->guessExtension();
+
+			//base64_encode(time())
+			$newFilename = uniqid().'.'.$extension;
+
+			$file->move($dir, $newFilename);
+			$training->setImg($newFilename);
 
 
 		}

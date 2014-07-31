@@ -3,6 +3,7 @@
 namespace Wf3\KikaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Training
@@ -25,20 +26,24 @@ class Training
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     *
+     * @Assert\NotBlank(message="l'intitulé de la formation doit être rempli")
+     *
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="img", type="string", length=255)
+     * @ORM\Column(name="img", type="string", length=255, nullable=false)
+     *
      */
     private $img;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="beginDate", type="date", nullable=true)
+     * @ORM\Column(name="beginDate", type="date", nullable=false)
      */
     private $beginDate;
 
@@ -152,6 +157,19 @@ class Training
     private $category;
 
 
+    /**
+    *
+    * @Assert\Image(
+    *     minWidth = 200,
+    *     maxWidth = 400,
+    *     minHeight = 200,
+    *     maxHeight = 400,
+    *     mimeTypesMessage = "Ce fichier n'est pas une image"
+    *)
+    */
+    private $file;
+
+
 
 
     /**
@@ -172,7 +190,7 @@ class Training
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = strip_tags($title);
 
         return $this;
     }
@@ -264,7 +282,7 @@ class Training
      */
     public function setStreet($street)
     {
-        $this->street = $street;
+        $this->street = strip_tags($street);
 
         return $this;
     }
@@ -287,7 +305,7 @@ class Training
      */
     public function setCity($city)
     {
-        $this->city = $city;
+        $this->city = strip_tags($city);
 
         return $this;
     }
@@ -570,5 +588,28 @@ class Training
     public function getCategory()
     {
         return $this->category;
+    }
+
+     /**
+     * Set file
+     *
+     * @param string $file
+     * @return User
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }
