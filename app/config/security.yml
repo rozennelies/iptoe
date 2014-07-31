@@ -7,6 +7,7 @@ security:
             form_login:
                 login_path: /connexion/
                 check_path: /login_check
+                default_target_path: /accountAccueil/ 
             logout:
                 path:   /logout
                 target: / 

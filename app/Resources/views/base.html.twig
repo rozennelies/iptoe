@@ -19,7 +19,9 @@
                 <!--li><a href="#">Connexion</a></li>
                 <li><a href="#">Deconnexion</a></li-->
                 {% if app.user %}
+                <li><a href="{{ path('wf3_kika_accountAccueil')}}">Mon compte</a></li>
                 <li><a href="{{ path('logout')}}">deconnexion</a></li>
+
                 {% else %}
                 <li><a href="{{ path('login')}}">connexion</a></li>
                 <li><a href="{{ path('wf3_kika_registercreate')}}">Inscrivez-vous !</a>

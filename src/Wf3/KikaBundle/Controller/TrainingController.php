@@ -8,6 +8,9 @@ use Wf3\KikaBundle\Form\AddTrainingType;
 use Wf3\KikaBundle\Entity\Training;
 use Wf3\KikaBundle\Entity\User;
 
+use \DateTime;
+
+
 class TrainingController extends Controller
 {
 
@@ -20,6 +23,8 @@ class TrainingController extends Controller
 	}	
 
 	public function addTrainingAction(Request $request) {
+
+		$coach = $this->getUser();
 
 		$training = new Training();
 		$training_form = $this->createForm(new AddTrainingType, $training);
@@ -40,6 +45,17 @@ class TrainingController extends Controller
 
 			$file->move($dir, $newFilename);
 			$training->setImg($newFilename);
+			$training->setStatus(1);
+			$training->setNumberStudent(0);
+			$training->setDateCreated(new DateTime());
+
+			// on passe l objet en entier 
+			$training->setCoach($coach);
+
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($training);
+			$em->flush();	
+
 
 
 		}
