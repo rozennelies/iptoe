@@ -4,6 +4,8 @@ namespace Wf3\KikaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 
 /**
@@ -11,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Wf3\KikaBundle\Entity\TrainingRepository")
+ * 
+ * @ORM\HasLifecycleCallbacks()
  */
 class Training
 {
@@ -161,15 +165,22 @@ class Training
     /**
     *
     * @Assert\Image(
-    *     minWidth = 200,
-    *     maxWidth = 400,
+    *     minWidth = 100,
+    *     maxWidth = 700,
     *     minHeight = 200,
-    *     maxHeight = 400,
+    *     maxHeight = 700,
     *     mimeTypesMessage = "Ce fichier n'est pas une image"
     *)
     */
     private $file;
 
+
+    /**
+    *
+    * @var integer
+    *    
+    */
+     private $trainingPlacesAvailable;
 
 
 
@@ -533,6 +544,11 @@ class Training
     public function __construct()
     {
         $this->trainingSubscriptions = new \Doctrine\Common\Collections\ArrayCollection();
+
+        // ajout du calcul de nombre de place an fait ce n'est pas encore hydraté
+        //$placeAvailable = 0;
+        //$placeAvailable = $this->getNumberPlaces() - $this->getNumberStudent();
+        //$this->setTrainingPlacesAvailable($placeAvailable);
     }
 
     /**
@@ -595,7 +611,7 @@ class Training
      * Set file
      *
      * @param string $file
-     * @return User
+     * @return Training
      */
     public function setFile($file)
     {
@@ -613,4 +629,41 @@ class Training
     {
         return $this->file;
     }
+
+    /**
+     * Set trainingPlacesAvailable
+     *
+     * @param integer $trainingPlacesAvailable
+     * @return Training
+     *
+     * @ORM\PostLoad
+     */
+    public function setTrainingPlacesAvailable($trainingPlacesAvailable)
+    {
+
+        // on a ajoute cette variabla à la classe
+        // et avec post load la fontion est lancée directement       
+        $trainingPlacesAvailable       = $this->getNumberPlaces() - $this->getNumberStudent();
+        $this->trainingPlacesAvailable = $trainingPlacesAvailable;
+
+        return $this;
+    }
+
+    /**
+     * Get trainingPlacesAvailable
+     *
+     * @return integer 
+     */
+    public function getTrainingPlacesAvailable()
+    {
+
+        // ajout du calcul de nombre de place
+        //$placeAvailable = 0;
+        // $placeAvailable = $this->getNumberPlaces() - $this->getNumberStudent();
+        //$this->setTrainingPlacesAvailable($placeAvailable);
+
+        return $this->trainingPlacesAvailable;
+    }
+
+
 }

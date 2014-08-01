@@ -36,4 +36,24 @@ class TrainingRepository extends EntityRepository
     }    
 
 
+    public function findOpenTrainings() {
+
+        $trainings = $this->createQueryBuilder('training')
+                 ->select('training')
+                 ->andWhere('training.status = 1')
+                 ->orderBy('training.beginDate','ASC','training.begin.Hours','ASC')
+                 ->setMaxResults(30)
+                 ->getQuery()
+                 ->getResult();
+
+       // echo ($count);  j ai  0        
+       
+        return $trainings;
+
+
+
+
+    }
+
+
 }

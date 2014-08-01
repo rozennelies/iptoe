@@ -44,6 +44,10 @@ wf3_kika_mySubscriptions:
     path:     /mySubscriptions/
     defaults: { _controller: Wf3KikaBundle:Training:mySubscriptions }
 
+wf3_kika_training_details:   
+    path:     /trainingDetails/{id}
+    defaults: { _controller: Wf3KikaBundle:Training:trainingDetails } 
+
 
 
 wf3_kika_homepage:

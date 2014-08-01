@@ -17,10 +17,58 @@ class TrainingController extends Controller
 
 	public function openTrainingsAction() {
 
-		 return $this->render('Wf3KikaBundle:Training:open_trainings.html.twig');
+		//récupère le repository de training (pour faire des SELECT)
+        $trainingRepository = $this->getDoctrine()->getRepository("Wf3KikaBundle:Training");
+
+        // création d une requete select afin de ne sélectionner que les formations ouvertes et par date
+
+        //$trainings = $trainingRepository->findAll();
+
+        // on peut aussi utiliser ça
+        //$trainings = $repository->findBy(
+   		//	 array('status' => 1),
+    	//	 array('dateCreated' => 'ASC'),
+    	//	 30
+		//	);
+
+        $trainings    =  $trainingRepository->findOpenTrainings();
+
+        // grosse débile j ai un array d oblet et pas un objet
+        //$nbPlaceTot   =  $training->getNumberPlaces();
+        //$nbStudent    =  $training->getNumberStudent();
+        //$nbPlaceOpen  =  $nbPlaceTot - $nbStudent;
+
+
+        $params = array (
+        	"trainings" => $trainings);
+
+
+
+		 return $this->render('Wf3KikaBundle:Training:open_trainings.html.twig',$params);
 
 
 	}	
+
+
+	public function trainingDetailsAction($id) {
+
+	//récupère le repository de training (pour faire des SELECT)
+    //    $trainingRepository = $this->getDoctrine()->getRepository("Wf3KikaBundle:Training");
+
+        // on va déplacer la requete dans le repository 
+    //    $training = $trainingRepository->findTrainingDetails($id);
+
+
+        //shoote ça à la vue
+     //   $params = array (
+     //       "trainingDetails" => $trainingDetails
+     //       );
+
+     //   return $this->render("Wf3KikaBundle:Training:training_details.html.twig",$params);
+
+
+	}
+
 
 	public function addTrainingAction(Request $request) {
 
@@ -55,7 +103,6 @@ class TrainingController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($training);
 			$em->flush();	
-
 
 
 		}

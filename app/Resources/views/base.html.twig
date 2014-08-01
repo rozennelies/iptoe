@@ -18,6 +18,11 @@
             <ul>
                 <!--li><a href="#">Connexion</a></li>
                 <li><a href="#">Deconnexion</a></li-->
+                <li><a href="{{ path('wf3_kika_openTrainings')}}">Voir les formations en cours </a></li>
+                <li><a href="{{ path('wf3_kika_addTraining')}}">Créer une formation</a></li>
+            
+
+
                 {% if app.user %}
                 <li><a href="{{ path('wf3_kika_accountAccueil')}}">Mon compte</a></li>
                 <li><a href="{{ path('logout')}}">deconnexion</a></li>

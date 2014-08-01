@@ -15,6 +15,56 @@ Les formations en cours !
 </h1>
 
 
+{# boucle sur la variable trainings #}
+	{% for training in trainings %}
+
+		{# pour afficher un lien vers chaque contenu #}
+		<li><a href="{{ path('wf3_kika_training_details', {'id': training.id} ) }}" 
+		title="{{ training.title }} "> {{ training.title }}</a></li></br>
+
+		<div> 
+			<img src="{{ asset('uploadsimg/training/')}}{{ training.img }}">
+		</div>
+
+		<div> formateur: {{ training.coach.pseudo }}</div>
+
+		<div> formateur: {{ training.trainingDesc| truncate(350, true, '...') }}</div>
+
+		<div> Date de la formation: {{ training.beginDate|date("d-m-Y") }}</div>
+		<div> début de la formation à {{ training.beginHours|date("H:i") }}</div>
+
+		<div> Durée: {{ training.duration }} heure(s) </div>
+
+		<div> Date de création de la formation: {{ training.dateCreated|date("d-m-Y") }}</div>
+
+
+		<div> lieu: {{ training.street }}</div>
+
+
+		<div> Nombre de places totales: {{ training.numberPlaces }}</div>
+
+		<div> Nombre de places disponibles: {{ training.trainingPlacesAvailable }}</div>
+
+		{% if training.trainingPlacesAvailable == 0 %}
+			<div>	Complete !   </div>
+
+		{% else %}
+			{% if "now"|date('Ymd') + 2  >= training.beginDate|date('Ymd') %}
+			
+				<div> il reste des places ! ne tardez pas   </div>
+			{% elseif "now"|date('YmdHi') - 2  >= training.dateCreated|date('YmdHi')%}
+				
+   					<div>	Nouvelle formation   </div>
+			{% endif %}
+		
+		{% endif %}
+
+		</br>
+	{% endfor %}	
+
+
+
+
 
 {# novalidate desactive la validation html5 des pop up #}
 {#   #}

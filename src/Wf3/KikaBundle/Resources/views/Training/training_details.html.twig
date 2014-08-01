@@ -1,0 +1,44 @@
+{% extends "::base.html.twig" %}
+
+{# commentaire twig #}
+
+{% block title %}
+	{{ parent() }} - détails d'une formation !
+{% endblock %}
+	
+	
+
+
+{% block body %}
+<h1>
+ {{ training.title }}</h1>
+
+{# % block wrapper1  %}
+<h1>
+ {{ content.title }}
+</h1>
+<h3> {{ content.category.name }}</h3>
+<div class="date">
+	{{ content.dateCreated|date("d-m-Y") }}
+</div>
+<div class="content">
+	{{ content.content }}
+</div>
+
+
+{% endblock % #}
+
+
+
+
+
+{# novalidate desactive la validation html5 des pop up #}
+{#   #}
+{# {{ form(register_form, {'attr': {'novalidate': 'novalidate'}})}}
+{% endblock %} #}
+
+{# wf3_wikibundle_content_darecreated #}
+{# chargement du calendar jQuery UI #}
+
+
+{% endblock %}

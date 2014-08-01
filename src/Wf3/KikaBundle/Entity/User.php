@@ -207,7 +207,7 @@ class User implements UserInterface, \Serializable, EquatableInterface
     /**
     *
     * @Assert\Image(
-    *     minWidth = 200,
+    *     minWidth = 100,
     *     maxWidth = 400,
     *     minHeight = 200,
     *     maxHeight = 400,
