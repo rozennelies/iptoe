@@ -18,9 +18,11 @@ Les formations en cours !
 {# boucle sur la variable trainings #}
 	{% for training in trainings %}
 
+		<ul>
 		{# pour afficher un lien vers chaque contenu #}
 		<li><a href="{{ path('wf3_kika_training_details', {'id': training.id} ) }}" 
 		title="{{ training.title }} "> {{ training.title }}</a></li></br>
+		</ul>
 
 		<div> 
 			<img src="{{ asset('uploadsimg/training/')}}{{ training.img }}">

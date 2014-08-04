@@ -11,7 +11,6 @@ wf3_kika_legal:
     path:     /legal/
     defaults: { _controller: Wf3KikaBundle:Default:legal }
 
-
 wf3_kika_registercreate:
     path:     /inscription/
     defaults: { _controller: Wf3KikaBundle:User:registerCreate }
@@ -48,6 +47,13 @@ wf3_kika_training_details:
     path:     /trainingDetails/{id}
     defaults: { _controller: Wf3KikaBundle:Training:trainingDetails } 
 
+wf3_kika_subscription_create:   
+    path:     /subscriptionCreate/{id}
+    defaults: { _controller: Wf3KikaBundle:Training:subscriptionCreate }     
+
+wf3_kika_subscription_delete:   
+    path:     /subscriptionDelete/{id}
+    defaults: { _controller: Wf3KikaBundle:Training:subscriptionDelete }    
 
 
 wf3_kika_homepage:

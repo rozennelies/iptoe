@@ -11,7 +11,24 @@
 
 {% block body %}
 <h1>
- {{ training.title }}</h1>
+ {{ trainingDetails.title }}</h1>
+
+
+{% if app.user %}
+
+ <a href="{{ path('wf3_kika_subscription_create', {'id': trainingDetails.id} ) }}" 
+		title="inscription  à cette formation "> Inscrivez-vous</a>
+
+
+<a href="{{ path('wf3_kika_subscription_delete', {'id': trainingDetails.id} ) }}" 
+		title="Desinscription  à cette formation "> Confirmez votre desinscription</a>
+{% else %}
+
+	 <a href="{{ path('login')}}" 
+		title="se connecter afin de s inscrire  à cette formation "> Connectez-vous pour vous inscrire</a>
+
+{% endif %}				
+
 
 {# % block wrapper1  %}
 <h1>
